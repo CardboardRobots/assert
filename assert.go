@@ -2,6 +2,7 @@ package assert
 
 import (
 	"errors"
+	"reflect"
 	"testing"
 )
 
@@ -16,11 +17,34 @@ func Equals[T comparable](t *testing.T, a T, b T, name string) bool {
 	return equals
 }
 
+func EqualsArray[T comparable](t *testing.T, a []T, b []T, name string) bool {
+	t.Helper()
+
+	equals := reflect.DeepEqual(a, b)
+	if !equals {
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, a)
+	}
+
+	return equals
+}
+
 func Getter[T comparable](t *testing.T, a func() T, b T, name string) bool {
 	t.Helper()
 
 	value := a()
 	equals := value == b
+	if !equals {
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, value)
+	}
+
+	return equals
+}
+
+func GetterArray[T comparable](t *testing.T, a func() []T, b []T, name string) bool {
+	t.Helper()
+
+	value := a()
+	equals := reflect.DeepEqual(value, b)
 	if !equals {
 		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, value)
 	}
