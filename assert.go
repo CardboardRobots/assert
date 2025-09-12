@@ -10,7 +10,7 @@ func Equals[T comparable](t *testing.T, a T, b T, name string) bool {
 
 	equals := a == b
 	if !equals {
-		t.Errorf("%v is incorrect.  Recieved: %v, Expected: %v", name, b, a)
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, a)
 	}
 
 	return equals
@@ -22,7 +22,7 @@ func Getter[T comparable](t *testing.T, a func() T, b T, name string) bool {
 	value := a()
 	equals := value == b
 	if !equals {
-		t.Errorf("%v is incorrect.  Recieved: %v, Expected: %v", name, b, value)
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, value)
 	}
 
 	return equals
@@ -80,7 +80,7 @@ func NotEquals[T comparable](t *testing.T, a T, b T, name string) bool {
 
 	notEquals := a != b
 	if !notEquals {
-		t.Errorf("%v is incorrect.  Recieved: %v, Expected: %v", name, b, a)
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, a)
 	}
 
 	return notEquals
@@ -92,7 +92,7 @@ func NotEqualsEval[T comparable](t *testing.T, a func() T, b T, name string) boo
 	value := a()
 	equals := value == b
 	if equals {
-		t.Errorf("%v is incorrect.  Recieved: %v, Expected: %v", name, b, value)
+		t.Errorf("%v is incorrect.  Expected: %v, Recieved: %v", name, b, value)
 	}
 
 	return !equals
